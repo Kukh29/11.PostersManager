@@ -22,7 +22,7 @@ class ManagerTest {
 
 
     @Test
-    public void shouldNullMovie() {   //   конструктор без параметров
+    public void shouldNullMovie() {   //   пустой список
         Manager movie = new Manager();
         Movie[] expected = {};
         Movie[] actual = movie.findAll();
@@ -36,6 +36,18 @@ class ManagerTest {
 
         Manager movie = new Manager();
         movie.addMovie(first);
+
+
+        Movie[] expected = {first};
+        Movie[] actual = movie.findAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddMovie2() {   // Добавление нового фильма, у уже имеющимся
+
+        Manager movie = new Manager();
+        movie.addMovie(first);
         movie.addMovie(second);
 
         Movie[] expected = {first, second};
@@ -45,7 +57,7 @@ class ManagerTest {
 
 
     @Test
-    public void shouldAddMovie2() {
+    public void shouldAddMovie3() {
         Manager manager = new Manager(11); // Вывод всех фильмов в порядке добавления (findAll)
         manager.addMovie(first);
         manager.addMovie(second);
@@ -134,8 +146,8 @@ class ManagerTest {
     }
 
     @Test
-    public void shouldFindLastFiveMovie() {
-        Manager manager = new Manager(5);
+    public void shouldFindLastFiveMovie() { // найти последние 5 фильмов в обратном порядке
+        Manager manager = new Manager();
         manager.addMovie(first);
         manager.addMovie(second);
         manager.addMovie(third);
@@ -144,6 +156,27 @@ class ManagerTest {
 
         Movie[] expected = {fifth, fourth, third, second, first};
         Movie[] actual = manager.findLast();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddMovieNoArgs() {  // @NoArgsConstructor
+        Manager manager = new Manager();
+        Movie one = new Movie();
+        Movie two = new Movie();
+        Movie three = new Movie();
+        Movie four = new Movie();
+        Movie five = new Movie();
+        Movie six = new Movie();
+        Movie seven = new Movie();
+        Movie eight = new Movie();
+        Movie nine = new Movie();
+        Movie ten = new Movie();
+        Movie eleven = new Movie();
+
+        manager.addMovie(one);
+        Movie[] expected = {one};
+        Movie[] actual = manager.findAll();
         assertArrayEquals(expected, actual);
     }
 }
