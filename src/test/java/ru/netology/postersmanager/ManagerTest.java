@@ -1,6 +1,8 @@
 package ru.netology.postersmanager;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.domain.Movie;
+import ru.netology.manager.Manager;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -18,9 +20,33 @@ class ManagerTest {
     Movie tenth = new Movie(10, "saw10", "horror");
     Movie eleventh = new Movie(11, "saw11", "horror");
 
+
     @Test
-    public void shouldAddMovie() {
-        Manager manager = new Manager(11); // добавим все фильмы
+    public void shouldNullMovie() {   //   конструктор без параметров
+        Manager movie = new Manager();
+        Movie[] expected = {};
+        Movie[] actual = movie.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldAddMovie() {   // Добавление нового фильма.
+
+        Manager movie = new Manager();
+        movie.addMovie(first);
+        movie.addMovie(second);
+
+        Movie[] expected = {first, second};
+        Movie[] actual = movie.findAll();
+        assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldAddMovie2() {
+        Manager manager = new Manager(11); // Вывод всех фильмов в порядке добавления (findAll)
         manager.addMovie(first);
         manager.addMovie(second);
         manager.addMovie(third);
@@ -120,78 +146,6 @@ class ManagerTest {
         Movie[] actual = manager.findLast();
         assertArrayEquals(expected, actual);
     }
-
-    Movie ten = new Movie();     // для конструктора без параметров
-
-
-    @Test
-    public void shouldAddMovieNoArgs() {
-        Manager manager = new Manager(1);
-        manager.addMovie(ten);
-
-        Movie[] expected = {ten};
-        Movie[] actual = manager.findAll();
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldShowId() {
-        Movie movie = new Movie();
-        movie.getId();
-        int expected = 0;
-        int actual = movie.getId();
-        assertEquals(expected, actual);
-    }
-
-    private void assertEquals(int expected, int actual) {
-    }
-
-    @Test
-    public void shouldShowName() {
-        Movie movie = new Movie();
-        movie.getName();
-        String expected = null;
-        String actual = movie.getName();
-        assertEquals2(expected, actual);
-    }
-
-    private void assertEquals2(String expected, String actual) {
-    }
-
-    @Test
-    public void shouldShowGenre() {
-        Movie movie = new Movie();
-        movie.getGenre();
-        String expected = null;
-        String actual = movie.getGenre();
-        assertEquals2(expected, actual);
-    }
-
-    @Test
-    public void shouldSetId() {
-        Movie movie = new Movie();
-        movie.setId(0);
-        int expected = 0;
-        int actual = movie.getId();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSetName() {
-        Movie movie = new Movie();
-        movie.setName(null);
-        String actual = movie.getName();
-        assertEquals2(null, actual);
-    }
-
-    @Test
-    public void shouldSetGenre() {
-        Movie movie = new Movie();
-        movie.setGenre(null);
-        String actual = movie.getGenre();
-        assertEquals2(null, actual);
-    }
-
 }
 
 

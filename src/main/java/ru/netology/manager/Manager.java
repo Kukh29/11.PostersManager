@@ -1,8 +1,19 @@
-package ru.netology.postersmanager;
+package ru.netology.manager;
+
+import ru.netology.domain.Movie;
 
 public class Manager {
 
     private Movie[] items = new Movie[0];
+    private int limit = 10;
+
+
+    public Manager() {
+    }
+
+    public Manager(int limit) {
+        this.limit = limit;
+    }
 
 
     public void addMovie(Movie movie) { // добавляем новый фильм
@@ -20,12 +31,6 @@ public class Manager {
         return result;
     }
 
-
-    private int limit;
-
-    public Manager(int limit) {         // выводим максимум лимит
-        this.limit = limit;
-    }
 
     public Movie[] findLast() {      // выводим в обратном порядке лимит (10)
         int resultLength;
